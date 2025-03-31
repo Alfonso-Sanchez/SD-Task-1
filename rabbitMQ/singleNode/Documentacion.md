@@ -124,6 +124,7 @@ El archivo de pruebas (`test_rabbitmq_client.py`) verifica el comportamiento del
 
 ### Paso 1: Asegurarse de que el servidor esté corriendo
 Ejecuta `server.py` como se describe en la sección 2.1.
+Ejecuta `broadcaster.py` como se describe en la seccion 2.2.
 
 ### Paso 2: Ejecutar las pruebas
 En una terminal (con el entorno activado y RabbitMQ corriendo), ejecuta:

@@ -121,7 +121,7 @@ class TestInsultFilterScaling(unittest.TestCase):
 
     # Pruebas de escalado
     def test_scale_to_max_servers(self):
-        """Probar escalado a 2 servidores con carga media"""
+        """Probar escalado a a maximo número de servidores"""
         # Verificar estado inicial
         timeout = 20
         start_time = time.time()
@@ -134,7 +134,7 @@ class TestInsultFilterScaling(unittest.TestCase):
         self.assertGreaterEqual(initial_servers, 1, "No se detectó al menos 1 servidor inicial")
         
         # Generar carga media distribuida y mantenerla hasta el final del test
-        print(f"[DEBUG] Generando carga media (intensity={LOAD_HIGH}) en {len(self.proxies)} servidores")
+        print(f"[DEBUG] Generando carga maxima (intensity={LOAD_HIGH}) en {len(self.proxies)} servidores")
         self.generate_load(self.proxies, intensity=LOAD_HIGH)  # Sin duration, se mantiene activa
         
         # Monitorear escalado mientras la carga está activa

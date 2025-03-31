@@ -148,7 +148,7 @@ El archivo de pruebas (`test_servers.py`) verifica el comportamiento de ambos se
 
 ### Paso 1: Asegurarse de que los servidores estén corriendo
 Ejecuta `server1.py` y `server2.py` como se describe en la sección 2.1.
-
+Ejecuta `broadcaster.py` como se describe en la seccion 2.2.
 ### Paso 2: Ejecutar las pruebas
 En una terminal (con el entorno activado y RabbitMQ corriendo), ejecuta:
 ```bash
