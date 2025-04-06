@@ -139,7 +139,18 @@ def main():
         except ValueError:
             print("⚠️ Entrada inválida. Usando 60s por defecto.")
             tiempo = 60
-        generate_live_plot(duration_sec=tiempo, interval=5)
+        
+        try:
+            interval = int(input("⏱️ Intervalo de actualización en segundos (mínimo: 2 | máximo: 10): ").strip())
+            if interval <= 2 or interval > 10:
+                print("⚠️ Intervalo fuera de rango. Usando 5s por defecto.")
+                interval = 5
+        except ValueError:
+            print("⚠️ Entrada inválida. Usando 5s por defecto.")
+            interval = 5
+
+        print(f"🕒 Graficando durante {tiempo} segundos con intervalos de {interval} segundos.")
+        generate_live_plot(duration_sec=tiempo, interval=interval)
     elif opcion == '2':
         curses.wrapper(display_stats)
     else:
