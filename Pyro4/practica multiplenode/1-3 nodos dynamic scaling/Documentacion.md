@@ -62,7 +62,8 @@ example.insultserver1
 Cuando termines, desactiva el entorno con:
 ```bash
 deactivate
-```ç
+```
+
 ---
 
 ## 2. Ejecución del Código
@@ -114,7 +115,7 @@ python stats.py
 
 ---
 
-#### 🔢 Modo gráfico (opción 1)
+#### Modo gráfico (opción 1)
 - Muestra una gráfica interactiva que representa los **mensajes por segundo** (barras) y la **cantidad de servidores activos** (línea).
 - Puedes especificar la duración del graficado en segundos (máximo 600).
 - La gráfica se actualiza cada 5 segundos con los datos actuales.
@@ -125,7 +126,7 @@ python stats.py
 
 ---
 
-#### 🖥️ Modo consola (opción 2)
+#### Modo consola (opción 2)
 - Muestra las estadísticas en texto para cada servidor: insultos por segundo, por 10 segundos, por minuto y el tiempo de respuesta.
 - También muestra el total de insultos/segundo agregados.
 - Se actualiza cada 2 segundos.
