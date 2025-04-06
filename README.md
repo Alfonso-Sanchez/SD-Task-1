@@ -125,5 +125,5 @@ Se incluyen scripts de carga que permiten:
 
 > Proyecto para la asignatura de Sistemas Distribuidos — Curso 2024-2025.
 
-Para dudas o mejoras, contactar al autor (alfonso.sanchez\@estudiants.urv.cat y eduard.vericat\@estudiants.urv.cat) o abrir un issue en el repositorio.
+Para dudas o mejoras, contactar a los autores (alfonso.sanchez\@estudiants.urv.cat y eduard.vericat\@estudiants.urv.cat) o abrir un issue en el repositorio.
 
