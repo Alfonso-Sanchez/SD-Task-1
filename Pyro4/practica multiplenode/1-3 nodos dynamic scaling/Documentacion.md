@@ -2,7 +2,7 @@
 
 Esta documentación detalla cómo configurar y ejecutar un proyecto basado en Pyro4 que implementa un clúster de servidores de insultos con escalado dinámico (`DynamicCluster`), un cliente que envía insultos (`Broadcaster`), un visualizador de estadísticas (`StatsDisplay`) y pruebas automatizadas (`TestInsultFilterScaling`). El sistema utiliza un entorno virtual de Python y el Name Server de Pyro4, con un archivo `servers.txt` para gestionar la lista de servidores activos.
 
-La fecha actual considerada para esta documentación es **31 de marzo de 2025**.
+La fecha actual considerada para esta documentación es **06 de abril de 2025**.
 
 ---
 
@@ -32,11 +32,18 @@ Instala las dependencias listadas en `requirements.txt`:
 ```bash
 pip install -r requirements.txt
 ```
+**Adicional para sistemas Linux**: si usas el modo gráfico, asegúrate de instalar el soporte para `tkinter`:
+```bash
+sudo apt install python3-tk
+```
+
 Contenido de `requirements.txt`:
 ```
 Pyro4==4.82
 serpent==1.41
+matplotlib==3.10.1
 ```
+(La lista puede incluir otras dependencias gráficas como `tk`, `numpy`, etc.)
 
 ### Paso 4: Configurar el Name Server de Pyro4
 Inicia el Name Server en una terminal separada (con el entorno activado):
@@ -55,8 +62,7 @@ example.insultserver1
 Cuando termines, desactiva el entorno con:
 ```bash
 deactivate
-```
-
+```ç
 ---
 
 ## 2. Ejecución del Código
@@ -96,20 +102,46 @@ python broadcaster.py
 - Si no hay servidores disponibles, espera y reintenta cada 2 segundos.
 
 ### 2.3. Ejecutar el Visualizador de Estadísticas (`StatsDisplay`)
-El visualizador muestra las métricas de todos los servidores activos.
+El visualizador permite monitorizar los servidores activos en tiempo real, tanto en modo consola (terminal) como en modo gráfico (gráfica en vivo).
 
 #### Paso 1: Iniciar el visualizador
-En otra terminal (con el entorno activado y el gestor corriendo), ejecuta:
+En una terminal (con el entorno activado y el gestor corriendo), ejecuta:
 ```bash
-python stats_display.py
+python stats.py
 ```
-- `stats_display.py` es el nombre sugerido para el archivo del visualizador.
-- Muestra estadísticas (insultos por segundo, 10 segundos, minuto y tiempo de respuesta) para cada servidor y un total por segundo.
+- `stats.py` es el archivo que contiene el visualizador.
+- Aparecerá un menú para seleccionar entre **modo gráfico (1)** o **modo consola (2)**.
+
+---
+
+#### 🔢 Modo gráfico (opción 1)
+- Muestra una gráfica interactiva que representa los **mensajes por segundo** (barras) y la **cantidad de servidores activos** (línea).
+- Puedes especificar la duración del graficado en segundos (máximo 600).
+- La gráfica se actualiza cada 5 segundos con los datos actuales.
+- **Nuevo:** Si se presiona `Ctrl+C` para interrumpir el graficado:
+  - El proceso **no se pierde**.
+  - Se guarda automáticamente una imagen (`scaling_plot.png`) con el progreso actual.
+  - Luego se muestra la gráfica con `plt.show()`.
+
+---
+
+#### 🖥️ Modo consola (opción 2)
+- Muestra las estadísticas en texto para cada servidor: insultos por segundo, por 10 segundos, por minuto y el tiempo de respuesta.
+- También muestra el total de insultos/segundo agregados.
+- Se actualiza cada 2 segundos.
 - Presiona `q` para salir.
 
+**Nuevo:** El modo consola ahora:
+- Verifica automáticamente el tamaño del terminal antes de mostrar estadísticas.
+- Si la ventana es demasiado pequeña, muestra un aviso con el número mínimo de líneas requeridas.
+- Esto evita errores tipo `_curses.error: addwstr() returned ERR`.
+
+---
+
 #### Notas
-- Lee `servers.txt` para determinar qué servidores monitorear.
-- Si un servidor no responde, muestra un mensaje de error.
+- Ambos modos leen `servers.txt` en cada iteración para adaptarse dinámicamente a los cambios en los servidores activos.
+- En caso de error de conexión con un servidor, se muestra un mensaje de error sin detener la ejecución.
+- El archivo `scaling_plot.png` se sobrescribe si ya existe.
 
 ---
 
